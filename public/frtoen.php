@@ -13,8 +13,6 @@ function nextphp() {
     );
 
     $_SESSION['study_local'] = $study_local;
-    header('Location: /frtoen.php');
-    exit;
 }
 
 if ($state == 'next') {

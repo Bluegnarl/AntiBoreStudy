@@ -13,8 +13,6 @@ function nextphp() {
     );
 
     $_SESSION['study_local'] = $study_local;
-    header('Location: /entofr.php');
-    exit;
 }
 
 if ($state == 'next') {
