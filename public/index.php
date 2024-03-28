@@ -8,8 +8,8 @@
 </head>
 <body>
     <h1>Choose Translation Direction</h1>
-    <a href="./frtoen.php">French to English</a>
-    <a href="./entofr.php">English to French</a>
+    <a href="/frtoen.php">French to English</a>
+    <a href="/entofr.php">English to French</a>
     <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
