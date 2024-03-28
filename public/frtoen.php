@@ -6,14 +6,14 @@ $state = $_GET['state'] ?? null;
 function nextphp() {
     $study = json_decode(file_get_contents('./bricks.json'));
     $study_length = count($study);
-    $study_rand = rand(0, $study_length - 1); // Corrected the range
+    $study_rand = rand(0, $study_length - 1);
     $study_local = array(
         "french" => $study[$study_rand]->french,
         "english" => $study[$study_rand]->english
     );
 
     $_SESSION['study_local'] = $study_local;
-    header('Location: /frtoen.php'); // Rediriger vers cette page même
+    header('Location: /frtoen.php');
     exit;
 }
 
@@ -38,7 +38,7 @@ $response = $_GET['response'] ?? null;
 <?php if ($state == 'response' && $response !== null) : ?>
     <p class="<?= ($response == $_SESSION['study_local']['english']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['english']) ? "correct" : "incorrect" ?></p>
 <?php endif ?>
-<form action="./frtoen.php" method="get"> <!-- Modifié pour rediriger vers la même page -->
+<form action="./frtoen.php" method="get">
     <p><h3> French :</h3> <?= isset($_SESSION['study_local']['french']) ? $_SESSION['study_local']['french'] : '' ?></p>
     <input type="text" name="response" value="<?= $response ?>" placeholder="Response In English">
     <input type="hidden" name="state" value="response">
