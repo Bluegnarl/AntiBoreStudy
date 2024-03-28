@@ -20,6 +20,7 @@ function nextphp() {
 
 if ($state == 'next') {
     nextphp();
+    echo "bite";
 }
 
 $response = $_GET['response'] ?? null;
@@ -45,7 +46,7 @@ $response = $_GET['response'] ?? null;
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="entofr.php?state=next">Next</a>
+<a href="entofr.php?state=next">Randomize</a>
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
