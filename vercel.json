@@ -7,6 +7,8 @@
   "routes": [
     { "src": "/api/index.php", "dest": "/api/index.php" },
     { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
+    { "src": "/frtoen.php", "dest": "/public/frtoen.php" },
+    { "src": "/entofr.php", "dest": "/public/entofr.php" },
     { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
