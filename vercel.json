@@ -7,6 +7,6 @@
   "routes": [
     { "src": "/api/index.php", "dest": "/api/index.php" },
     { "src": "/public/styles/(.*)", "dest": "/public/styles/$1" },
-    { "src": "/(.*)", "dest": "/public/index.php" }
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
