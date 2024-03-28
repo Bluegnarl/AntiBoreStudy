@@ -3,6 +3,9 @@ session_start();
 
 $state = $_GET['state'] ?? null;
 
+$study = json_decode(file_get_contents(__DIR__ . '/bricks.json'));
+var_dump($study[0]);
+
 function nextphp() {
     $study = json_decode(file_get_contents(__DIR__ . '/bricks.json'));
     $study_length = count($study);
