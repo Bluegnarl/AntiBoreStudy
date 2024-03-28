@@ -3,7 +3,6 @@ session_start();
 
 $state = $_GET['state'] ?? null;
 
-
 function nextphp() {
     $study = json_decode(file_get_contents(__DIR__ . '/bricks.json'));
     $study_length = count($study);
@@ -13,16 +12,20 @@ function nextphp() {
         "english" => $study[$study_rand]->english
     );
 
-    var_dump($study[0]);
-
     $_SESSION['study_local'] = $study_local;
 }
 
 if ($state == 'next') {
     nextphp();
+    header("Location: /entofr.php"); // Rediriger vers la même page après la génération d'une nouvelle question
+    exit();
 }
 
 $response = $_GET['response'] ?? null;
+
+if ($state == 'response' && $response !== null) {
+    // Vérifiez la réponse ici si nécessaire
+}
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +48,7 @@ $response = $_GET['response'] ?? null;
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="/entofr.php?state=next">Randomize</a>
+<a href="/entofr.php?state=next">Randomize</a> <!-- Lien pour générer une nouvelle question -->
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
