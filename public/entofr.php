@@ -1,8 +1,5 @@
 <?php
-session_start();
-
 $state = $_GET['state'] ?? null;
-var_dump($_SESSION['study_local']);
 
 function nextphp() {
     $study = json_decode(file_get_contents(__DIR__ . '/bricks.json'));
@@ -13,7 +10,7 @@ function nextphp() {
         "english" => $study[$study_rand]->english
     );
 
-    $_SESSION['study_local'] = $study_local;
+    setcookie('study_local', json_encode($study_local), time() + 3600, '/');
 }
 
 if ($state == 'next') {
@@ -23,11 +20,7 @@ if ($state == 'next') {
 }
 
 $response = $_GET['response'] ?? null;
-
-if ($state == 'response' && $response !== null) {
-
-}
-
+$study_local = isset($_COOKIE['study_local']) ? json_decode($_COOKIE['study_local'], true) : null;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,11 +32,15 @@ if ($state == 'response' && $response !== null) {
 </head>
 <body>
 <a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
-<?php if ($state == 'response' && $response !== null) : ?>
-    <p class="<?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['english']) ? "correct" : "incorrect" ?></p>
+
+<?php if ($state == 'response' && $response !== null && $study_local) : ?>
+    <p class="<?= ($response == $study_local['french']) ? "correct" : "incorrect" ?>">
+        Your response "<?= $response ?>" is <?= $response == $study_local['french'] ? "correct" : "incorrect" ?>
+    </p>
 <?php endif ?>
+
 <form action="/entofr.php" method="get">
-    <p><h3> English :</h3> <?= isset($_SESSION['study_local']['english']) ? $_SESSION['study_local']['english'] : '' ?></p>
+    <p><h3> English :</h3> <?= $study_local ? $study_local['english'] : '' ?></p>
     <input type="text" name="response" value="<?= $response ?>" placeholder="Response In French">
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
