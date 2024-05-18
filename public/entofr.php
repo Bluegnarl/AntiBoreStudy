@@ -2,6 +2,7 @@
 session_start();
 
 $state = $_GET['state'] ?? null;
+var_dump($_SESSION['study_local']);
 
 function nextphp() {
     $study = json_decode(file_get_contents(__DIR__ . '/bricks.json'));
@@ -17,14 +18,14 @@ function nextphp() {
 
 if ($state == 'next') {
     nextphp();
-    header("Location: /entofr.php"); // Rediriger vers la même page après la génération d'une nouvelle question
+    header("Location: /entofr.php");
     exit();
 }
 
 $response = $_GET['response'] ?? null;
 
 if ($state == 'response' && $response !== null) {
-    // Vérifiez la réponse ici si nécessaire
+
 }
 
 ?>
@@ -38,7 +39,6 @@ if ($state == 'response' && $response !== null) {
 </head>
 <body>
 <a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
-<span>Don't use <b>capital letters</b> and don't forget <b>"to" before an infinitive</b></span>
 <?php if ($state == 'response' && $response !== null) : ?>
     <p class="<?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['english']) ? "correct" : "incorrect" ?></p>
 <?php endif ?>
@@ -48,7 +48,7 @@ if ($state == 'response' && $response !== null) {
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="/entofr.php?state=next">Randomize</a> <!-- Lien pour générer une nouvelle question -->
+<a href="/entofr.php?state=next">Randomize</a>
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
