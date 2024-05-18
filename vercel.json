@@ -1,9 +1,21 @@
 {
+  
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.0"
     }
   },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Permissions-Policy",
+          "value": "interest-cohort=()"
+        }
+      ]
+    }
+  ],
   "routes": [
     { "src": "/api/index.php", "dest": "/api/index.php" },
     { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
