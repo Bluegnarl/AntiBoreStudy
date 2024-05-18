@@ -10,6 +10,7 @@ function nextphp() {
         "english" => $study[$study_rand]->english
     );
 
+    // Encode the study_local array to a JSON string and set it as a cookie
     setcookie('study_local', json_encode($study_local), time() + 3600, '/');
 }
 
@@ -29,6 +30,7 @@ $study_local = isset($_COOKIE['study_local']) ? json_decode($_COOKIE['study_loca
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/style.css">
     <title>EasyStudy</title>
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 </head>
 <body>
 <a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
