@@ -1,5 +1,6 @@
 <?php
-// Démarrage du script PHP
+session_start();
+
 $state = $_GET['state'] ?? null;
 
 function nextphp() {
@@ -11,43 +12,39 @@ function nextphp() {
         "english" => $study[$study_rand]->english
     );
 
-    // Encode the study_local array to a JSON string and set it as a cookie
-    setcookie('study_local', json_encode($study_local), time() + 3600, '/');
+    $_SESSION['study_local'] = $study_local;
 }
 
 if ($state == 'next') {
     nextphp();
-    header("Location: /public/entofr.php");
+    header("Location: /entofr.php");
     exit();
 }
 
 $response = $_GET['response'] ?? null;
-$study_local = isset($_COOKIE['study_local']) ? json_decode($_COOKIE['study_local'], true) : null;
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/styles/style.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <title>EasyStudy</title>
 </head>
 <body>
-<a href="/public/home.php" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
-
-<?php if ($state == 'response' && $response !== null && $study_local) : ?>
-    <p class="<?= ($response == $study_local['french']) ? "correct" : "incorrect" ?>">
-        Your response "<?= htmlspecialchars($response) ?>" is <?= ($response == $study_local['french']) ? "correct" : "incorrect" ?>
-    </p>
+<a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
+<span>Don't use <b>capital letters</b> and don't forget <b>"to" before an infinitive</b></span>
+<?php if ($state == 'response' && $response !== null) : ?>
+    <p class="<?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?></p>
 <?php endif ?>
-
-<form action="/public/entofr.php" method="get">
-    <p><h3> English :</h3> <?= $study_local ? htmlspecialchars($study_local['english']) : '' ?></p>
-    <input type="text" name="response" value="<?= htmlspecialchars($response) ?>" placeholder="Response In French">
+<form action="/entofr.php" method="get">
+    <p><h3> English :</h3> <?= isset($_SESSION['study_local']['english']) ? $_SESSION['study_local']['english'] : '' ?></p>
+    <input type="text" name="response" value="<?= $response ?>" placeholder="Response In French">
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="/public/entofr.php?state=next">Randomize</a>
+<a href="/entofr.php?state=next">Randomize</a> <!-- Lien pour générer une nouvelle question -->
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>

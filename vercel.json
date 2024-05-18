@@ -1,28 +1,13 @@
 {
-  "builds": [
-    {
-      "src": "public/*.php",
-      "use": "@vercel/php"
-    }
-  ],
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.0"
     }
   },
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Permissions-Policy",
-          "value": "interest-cohort=()"
-        }
-      ]
-    }
-  ],
   "routes": [
-    { "src": "/public/(.*)", "dest": "/public/$1" },
-    { "src": "/api/(.*)", "dest": "/api/$1" }
+    { "src": "/api/index.php", "dest": "/api/index.php" },
+    { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
+    { "src": "/bricks.json", "dest": "/public/bricks.json" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
