@@ -46,7 +46,7 @@ $response = $_GET['response'] ?? null;
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="/?state=next">Randomize</a> <!-- Lien pour générer une nouvelle question -->
+<a href="/?state=next">Randomize</a>
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
