@@ -28,7 +28,7 @@ $response = $_GET['response'] ?? null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/style.css">
-    <title>EasyStudy</title>
+    <title>Anti Bore Study</title>
 </head>
 <body>
 <a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
