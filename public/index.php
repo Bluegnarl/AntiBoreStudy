@@ -25,6 +25,7 @@ $response = $_GET['response'] ?? null;
 </head>
 <body>
 <form action="/" method="post">
+    <p><?= $study[0]['name'] ?></p>
     <input type="text" name="name" placeholder="Response">
     <button type="submit">Send</button>
 </form>
