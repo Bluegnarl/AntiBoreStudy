@@ -1,26 +1,15 @@
 <?php
-session_start();
 
-$state = $_GET['state'] ?? null;
+$study = json_decode(file_get_contents(__DIR__ . '/datas/bricks.json'), true);
 
-function nextphp() {
-    $study = json_decode(file_get_contents(__DIR__ . '/datas/bricks.json'));
-    $study_length = count($study);
-    $study_rand = rand(0, $study_length - 1);
-    $study_local = array(
-        "french" => $study[$study_rand]->french,
-        "english" => $study[$study_rand]->english
-    );
+$name = $_POST['name'] ?? null;
 
-    $_SESSION['study_local'] = $study_local;
-}
+if($name) {
+    $study[0]['name'] = $name;
 
-nextphp();
+    file_put_contents(__DIR__ . '/datas/bricks.json', json_encode($study));
 
-if ($state == 'next') {
-    nextphp();
-    header("Location: /");
-    exit();
+    header('Location: /');
 }
 
 $response = $_GET['response'] ?? null;
@@ -35,18 +24,9 @@ $response = $_GET['response'] ?? null;
     <title>EasyStudy</title>
 </head>
 <body>
-<a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
-<span>Don't use <b>capital letters</b> and don't forget <b>"to" before an infinitive</b></span>
-<?php if ($state == 'response' && $response !== null) : ?>
-    <p class="<?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?></p>
-<?php endif ?>
-<form action="/" method="get">
-    <p><h3> English :</h3> <?= isset($_SESSION['study_local']['english']) ? $_SESSION['study_local']['english'] : '' ?></p>
-    <input type="text" name="response" value="<?= $response ?>" placeholder="Response In French">
-    <input type="hidden" name="state" value="response">
+<form action="/" method="post">
+    <input type="text" name="name" placeholder="Response">
     <button type="submit">Send</button>
 </form>
-<a href="/?state=next">Randomize</a>
-<footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
