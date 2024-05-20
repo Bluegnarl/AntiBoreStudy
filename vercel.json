@@ -7,7 +7,7 @@
   "routes": [
     { "src": "/api/index.php", "dest": "/api/index.php" },
     { "src": "/styles/(.*)", "dest": "/public/styles/$1" },
-    { "src": "/bricks.json", "dest": "/public/bricks.json" },
+    { "src": "/datas/bricks.json", "dest": "/public/datas/bricks.json" },
     { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }

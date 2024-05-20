@@ -4,7 +4,7 @@ session_start();
 $state = $_GET['state'] ?? null;
 
 function nextphp() {
-    $study = json_decode(file_get_contents(__DIR__ . '/bricks.json'));
+    $study = json_decode(file_get_contents(__DIR__ . '/datas/bricks.json'));
     $study_length = count($study);
     $study_rand = rand(0, $study_length - 1);
     $study_local = array(
@@ -14,6 +14,8 @@ function nextphp() {
 
     $_SESSION['study_local'] = $study_local;
 }
+
+nextphp();
 
 if ($state == 'next') {
     nextphp();
