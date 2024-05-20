@@ -19,7 +19,7 @@ nextphp();
 
 if ($state == 'next') {
     nextphp();
-    header("Location: /");
+    header("Location: /entofr.php");
     exit();
 }
 
@@ -40,13 +40,13 @@ $response = $_GET['response'] ?? null;
 <?php if ($state == 'response' && $response !== null) : ?>
     <p class="<?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?></p>
 <?php endif ?>
-<form action="/" method="get">
+<form action="/entofr.php" method="get">
     <p><h3> English :</h3> <?= isset($_SESSION['study_local']['english']) ? $_SESSION['study_local']['english'] : '' ?></p>
     <input type="text" name="response" value="<?= $response ?>" placeholder="Response In French">
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="/?state=next">Randomize</a>
+<a href="/entofr.php?state=next">Randomize</a> <!-- Lien pour générer une nouvelle question -->
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>

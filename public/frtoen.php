@@ -15,12 +15,8 @@ function nextphp() {
     $_SESSION['study_local'] = $study_local;
 }
 
-nextphp();
-
 if ($state == 'next') {
     nextphp();
-    header("Location: /");
-    exit();
 }
 
 $response = $_GET['response'] ?? null;
@@ -38,15 +34,15 @@ $response = $_GET['response'] ?? null;
 <a href="/" style="position: absolute; top: 0; margin: 24px; width: auto; font-weight: 600;">Main Menu</a>
 <span>Don't use <b>capital letters</b> and don't forget <b>"to" before an infinitive</b></span>
 <?php if ($state == 'response' && $response !== null) : ?>
-    <p class="<?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['french']) ? "correct" : "incorrect" ?></p>
+    <p class="<?= ($response == $_SESSION['study_local']['english']) ? "correct" : "incorrect" ?>">Your response "<?= $response ?>" is <?= ($response == $_SESSION['study_local']['english']) ? "correct" : "incorrect" ?></p>
 <?php endif ?>
-<form action="/" method="get">
-    <p><h3> English :</h3> <?= isset($_SESSION['study_local']['english']) ? $_SESSION['study_local']['english'] : '' ?></p>
-    <input type="text" name="response" value="<?= $response ?>" placeholder="Response In French">
+<form action="./frtoen.php" method="get">
+    <p><h3> French :</h3> <?= isset($_SESSION['study_local']['french']) ? $_SESSION['study_local']['french'] : '' ?></p>
+    <input type="text" name="response" value="<?= $response ?>" placeholder="Response In English">
     <input type="hidden" name="state" value="response">
     <button type="submit">Send</button>
 </form>
-<a href="/?state=next">Randomize</a>
+<a href="frtoen.php?state=next">Randomize</a>
 <footer>Par <b>Koçak Ali</b> ou <b>Bluegnarl</b></footer>
 </body>
 </html>
