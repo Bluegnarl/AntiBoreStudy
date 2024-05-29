@@ -15,8 +15,6 @@ function nextphp() {
     $_SESSION['study_local'] = $study_local;
 }
 
-nextphp();
-
 if ($state == 'next') {
     nextphp();
     header("Location: /");
